@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-
-@Entity('user')
-export class User {
+//--old--
+//@Entity('user')
+@Entity() 
+export class User extends BaseEntity{
 
 
     @PrimaryGeneratedColumn('increment')
