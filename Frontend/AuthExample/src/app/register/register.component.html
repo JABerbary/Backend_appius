@@ -1,0 +1,21 @@
+<form>
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="name">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="email">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword">
+    </mat-form-field>
+    <br>
+    <button mat-button color="primary" (click)="goBack()">Go Back</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </form>
+  
