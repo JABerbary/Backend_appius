@@ -1,4 +1,4 @@
-# API sobre Typescript com Autenticação de usuário
+# API de Autenticação e Validação de usuário
 
  Parte inicial de uma API em que faria a comunicação entre dois sistemas  [Pipedrive](https://www.pipedrive.com/) e [Gestãoclick](https://gestaoclick.com.br/)
 
