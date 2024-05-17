@@ -1,11 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PartialType } from '@nestjs/mapped-types';
 import { IsNumber, IsString } from 'class-validator';
 
 export class UsersDTO {
 
-    // @ApiProperty()
-    // user_id: number;
 
     @ApiProperty()
     @IsString()
