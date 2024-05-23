@@ -7,9 +7,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
+  const PORT = 3000;
   const config = new DocumentBuilder()
     .setTitle('Users')
-    .setDescription('My shopping list API description')
+    .setDescription('Testing API Application')
     .setVersion('1.0')
     .addTag('app')
     .addBearerAuth(
@@ -24,6 +25,8 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
-  await app.listen(3000);
+  await app.listen(PORT,() => {
+    console.log(`🚀 Application running at port ${PORT}`)
+  });
 }
 bootstrap();
