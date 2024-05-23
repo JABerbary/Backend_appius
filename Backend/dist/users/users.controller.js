@@ -16,19 +16,19 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("../auth/Jwt/jwt-auth.guard");
 const users_service_1 = require("../users/users.service");
-const UsersDto_1 = require("../Model/Dto/UsersDto");
+const UsersDto_1 = require("../users/Dto/UsersDto");
 let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
     }
     create(createUserDto) {
-        return this.userService.create(createUserDto);
+        return this.userService.createUser(createUserDto);
     }
-    async findAll() {
-        return this.userService.findAll();
+    listUser() {
+        return this.userService.ListUser();
     }
-    async getById(id) {
-        return this.userService.getById(id);
+    listUserById(id) {
+        return this.userService.ListUser();
     }
     update(id, updateUserDto) {
         return this.userService.editUser(id, updateUserDto);
@@ -39,29 +39,28 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [UsersDto_1.UsersDTO]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "create", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('/'),
+    (0, common_1.Get)('/list'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "findAll", null);
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "listUser", null);
 __decorate([
-    (0, common_1.Get)(':id'),
+    (0, common_1.Get)('/:id/'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "getById", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "listUserById", null);
 __decorate([
     (0, common_1.Patch)('/edit/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, UsersDto_1.UsersDTO]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:paramtypes", [String, UsersDto_1.UsersDTO]),
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 UsersController = __decorate([
     (0, common_1.Controller)('user'),

@@ -10,14 +10,14 @@ export class AuthService {
     private jwtService: JwtService) { }
 
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.getByEmail(username);
-    if (user && user.passwords === pass) {
-      const { passwords, ...result } = user;
-      return result;
-    }
-    return null;
-  }
+  // async validateUser(username: string, pass: string): Promise<any> {
+  //   const user = await this.usersService.getByEmail(username);
+  //   if (user && user.passwords === pass) {
+  //     const { passwords, ...result } = user;
+  //     return result;
+  //   }
+  //   return null;
+  // }
 
 
   async login(user: any) {

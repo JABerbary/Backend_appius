@@ -7,9 +7,10 @@ const swagger_1 = require("@nestjs/swagger");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe());
+    const PORT = 3000;
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Users')
-        .setDescription('My shopping list API description')
+        .setDescription('Testing API Application')
         .setVersion('1.0')
         .addTag('app')
         .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'access-token')
@@ -17,7 +18,9 @@ async function bootstrap() {
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('appiusDoc', app, document);
     app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
-    await app.listen(3000);
+    await app.listen(PORT, () => {
+        console.log(`🚀 Application running at port ${PORT}`);
+    });
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
