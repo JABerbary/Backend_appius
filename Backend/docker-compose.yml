@@ -8,7 +8,7 @@ services:
     environment:
       - DATABASE_NAME=AppiusDB
       - DATABASE_USER=AppiusDB
-      - DATABASE_PASS=08092018acdc
+      - DATABASE_PASS=""
       - DATABASE_URI=mongodb://mongodb:27017/AppiusDB
       - PORT=3000
     ports:
@@ -24,4 +24,4 @@ services:
       - '27018:27017'
     environment:
       MONGO_INITDB_ROOT_USERNAME: AppiusDB
-      MONGO_INITDB_ROOT_PASSWORD: 08092018acdc
+      MONGO_INITDB_ROOT_PASSWORD: ""
