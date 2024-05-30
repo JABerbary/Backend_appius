@@ -11,11 +11,30 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const users_module_1 = require("./users/users.module");
+const throttler_1 = require("@nestjs/throttler");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forRoot('mongodb://localhost/nest')],
+        imports: [throttler_1.ThrottlerModule.forRoot([{
+                    ttl: 60,
+                    limit: 10,
+                }]),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath: [`./.env`],
+            }),
+            mongoose_1.MongooseModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: (configService) => ({
+                    uri: configService.get('DATABASE_URI'),
+                    dbName: configService.get('projects'),
+                }),
+                inject: [config_1.ConfigService],
+            }),
+            users_module_1.UsersModule,],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

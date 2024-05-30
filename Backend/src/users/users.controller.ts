@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete, UseGuards, Put, Patch } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/Jwt/jwt-auth.guard';
 import { UsersService } from '../users/users.service';
-import { UsersDTO } from 'src/Model/Dto/UsersDto';
+import { UsersDTO } from '../users/Dto/UsersDto';
 
 
 
@@ -11,14 +11,23 @@ export class UsersController {
   constructor(private readonly userService: UsersService,) { }
 
   @Post('/')
-  create(@Body() createUserDto: UsersDTO): Promise<{}> {
+  create(@Body() createUserDto: UsersDTO) {
     return this.userService.createUser(createUserDto);
   }
 
+  @Get('/list')
+  listUser(){
+    return  this.userService.ListUser();
+  }
+
+  @Get('/:id/')
+  listUserById(@Param('id') id :string){
+    return  this.userService.ListUser();
+  }
 
   @Patch('/edit/:id')
-  update(@Param('id') id: number, @Body() updateUserDto: UsersDTO): Promise<{}> {
-    return this.userService.editUser(updateUserDto,id);
+  update( @Param('id') id: string,@Body() updateUserDto: UsersDTO) {
+    return this.userService.editUser(id,updateUserDto);
   }
 
 
