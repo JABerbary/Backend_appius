@@ -1,28 +1,38 @@
-# Application Docker file Configuration
-# Visit https://docs.docker.com/engine/reference/builder/
-# Using multi stage build
+# Stage 1: Build Stage
+FROM node:16.20.2-slim AS builder
 
-# Prepare the image when build
-# also use to minimize the docker image
-FROM node:14-alpine as builder
-
+# Set the working directory
 WORKDIR /app
+
+# Copy package.json and package-lock.json first to utilize Docker cache
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
+
+# Copy the rest of the application files
 COPY . .
+
+# Build the Nest.js application
 RUN npm run build
 
+# Stage 2: Production Stage
+FROM node:16.20.2-slim
 
-# Build the image as production
-# So we can minimize the size
-FROM node:14-alpine
-
+# Set the working directory
 WORKDIR /app
-COPY package*.json ./
-ENV PORT=4000
-ENV NODE_ENV=Production
-RUN npm install
-COPY --from=builder /app/dist ./dist
-EXPOSE ${PORT}
 
-CMD ["npm", "run", "start"]
+# Copy the built application from the builder stage
+COPY --from=builder /app/dist ./dist
+
+# Copy the node_modules from the builder stage
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copy other necessary files
+COPY package*.json ./
+
+# Expose port 4000
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "dist/main"]

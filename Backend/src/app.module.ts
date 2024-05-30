@@ -4,6 +4,8 @@ import {AppController} from './app.controller';
 import {AppService } from './app.service';
 import {UsersModule} from './users/users.module'
 import {ThrottlerModule } from '@nestjs/throttler';
+import { ConfigModule,ConfigService } from '@nestjs/config';
+
 
 
 @Module({
@@ -11,13 +13,19 @@ import {ThrottlerModule } from '@nestjs/throttler';
     ttl: 60,
     limit: 10,
   }]),
-  MongooseModule.forRoot(process.env.DATABASE_URI,{ 
-    dbName : process.env.DATABASE_NAME,
-    auth: {
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASS,
-    },
+  ConfigModule.forRoot({
+    isGlobal: true,
+    envFilePath: [`./.env`],
   }),
+  MongooseModule.forRootAsync({
+    imports: [ConfigModule],
+    useFactory: (configService: ConfigService) => ({
+      uri: configService.get('DATABASE_URI'),
+      dbName: configService.get('projects'),
+    }),
+    inject: [ConfigService],
+  }),
+  
  
   UsersModule,
 ],
