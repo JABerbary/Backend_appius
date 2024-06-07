@@ -16,11 +16,15 @@ let User = class User {
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], User.prototype, "first_name", void 0);
+], User.prototype, "email", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], User.prototype, "firstname", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], User.prototype, "lastname", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
@@ -30,7 +34,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "user_status", void 0);
 User = __decorate([
-    (0, mongoose_1.Schema)({ collection: 'users', timestamps: true })
+    (0, mongoose_1.Schema)()
 ], User);
 exports.User = User;
 exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);

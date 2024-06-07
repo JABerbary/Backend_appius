@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
-  const PORT = 3000;
+  const PORT = 3001;
   const config = new DocumentBuilder()
     .setTitle('Users')
     .setDescription('Testing API Application')

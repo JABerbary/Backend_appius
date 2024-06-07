@@ -7,7 +7,7 @@ const swagger_1 = require("@nestjs/swagger");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe());
-    const PORT = 3000;
+    const PORT = 3001;
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Users')
         .setDescription('Testing API Application')

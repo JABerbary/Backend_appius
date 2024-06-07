@@ -6,8 +6,6 @@ import {UsersModule} from './users/users.module'
 import {ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule,ConfigService } from '@nestjs/config';
 
-
-
 @Module({
   imports: [ThrottlerModule.forRoot([{
     ttl: 60,
